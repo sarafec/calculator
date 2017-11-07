@@ -47,27 +47,6 @@ function isEmpty() {
 	}
 }
 
-/* LEXER IMPLEMENTATION */
-/* ReadExpr Module */
-//analyze expression
-//load into queue
-
-let readExprModule = function() {
-	//private functions
-	function readInput(input) {
-		console.log(input);
-	}
-
-	//public methods
-	return {
-		read: readInput
-	};
-}();
-
-/* PARSER IMPLEMENTATION */
-/* EvaluateExpr Module */
-//evaluate queue with a running total
-
 
 /* HELPER FUNCTIONS */
 function isWhiteSpace(ch) {
@@ -83,110 +62,6 @@ function isDecimalDigit(ch) {
 	return (ch >= '0') && (ch <= '9');
 }
 
-//creates an object for a given token type and value
-function createToken(priority, value) {
-	return {
-		priority: priority,
-		value: value
-	};
-}
-
-//advance to the next chracter
-function getNextChar() {
-	let ch = 'x00',
-		i = index;
-	if (i < length) {
-		ch = expression.charAt(i);
-		index += 1;
-	}
-	return ch;
-}
-
-//look at next character without moving forward
-function peekNextChar(){
-	let i = index;
-	return (( i < length) ? expression.charAt(i) : 'x00');
-}
-
-//skip whitespace
-function skipSpaces(){
-	let ch;
-
-	while (index < length){
-		ch = peekNextChar();
-		if (!isWhiteSpace(ch)) {
-			break;
-		}
-		getNextChar();
-	}
-}
-
-function scanOperator() {
-	let ch = peekNextChar();
-	if ('+-*/()%='.indexOf(ch) >= 0) {
-		return createToken('Operator', getNextChar());
-	}
-	return undefined;
-}
-
-//decide whether a series of characters is an identifier
-function isIdentifierStart(ch) {
-	return (ch === '_') || isLetter(ch);
-}
-
-function isIdentifierPart(ch) {
-	return isIdentifierStart(ch) || isDecimalDigit(ch);
-}
-
-function scanIdentifier() {
-	let ch, id;
-	ch = peekNextChar();
-	if (!isIdentifierStart(ch)) {
-		return unefined;
-	}
-
-	id = getNextChar();
-	while(true) {
-		ch = peekNextChar();
-		if(!isIdentifierPart(ch)) {
-			break;
-		}
-		id += getNextChar();
-	}
-	return createToken('Identifier', id);
-}
-
-//return a token representing a number
-//return undefined if no number is recognized
-function scanNumber() {
-	let ch;
-	//detect if the character is a number
-	ch = peekNextChar();
-	if (!isDecimalDigit(ch) && (ch !== '.')) {
-		return undefined;
-	}
-	number = '';
-	if (ch !== '.'){
-		number = getNextChar();
-		while(true) {
-			ch = peekNextChar();
-			if(!isDecimalDigit(ch)) {
-				break;
-			}
-			number += getNextChar();
-		}
-	//support for floating point numbers
-	} else if(ch === '.'){
-		number += getNextChar();
-		while (true){
-			ch = peekNextChar();
-			if (!isDecimalDigit(ch)) {
-				break;
-			}
-			number += getNextChar();
-		}
-	}
-}
 
 /* BROWSER EVENTS */
 let calculatorResult = document.querySelector('.calculator-input');
@@ -249,3 +124,7 @@ calculatorResult.addEventListener('change', function(evt){
 	//can we move this out to its own function?
 	currentCalcVal = evt.target.value;
 });
+
+// todo
+// 1 - add identifiers into priority queue
+// 2 - evaluate from priority queue based on precedence
