@@ -69,3 +69,15 @@ calcArea.addEventListener('keydown', function(evt){
 calculatorResult.addEventListener('change', function(evt){
 	currentCalcVal = evt.target.value;
 });
+
+// todos
+// 1 - add space after closing paren
+// 2 - add helper method to decide if value is a operator or a number
+// 3 - create tree-like data structure to traverse input array
+// 4 - calculate input from traversing tree-like data structure
+// 5 - change input to reflect calculation
+// 6 - add a testing library + assertions
+
+// question
+// 1 - how do you transform a string form operator into an actual operator
+//	   we could always create a switch statement, but is there a better way?
