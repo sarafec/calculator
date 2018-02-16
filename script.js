@@ -71,13 +71,8 @@ calculatorResult.addEventListener('change', function(evt){
 });
 
 // todos
-// 1 - add space after closing paren
-// 2 - add helper method to decide if value is a operator or a number
-// 3 - create tree-like data structure to traverse input array
-// 4 - calculate input from traversing tree-like data structure
-// 5 - change input to reflect calculation
-// 6 - add a testing library + assertions
-
-// question
-// 1 - how do you transform a string form operator into an actual operator
-//	   we could always create a switch statement, but is there a better way?
+// 1 - ensure really consistent ui input 
+// 1a - can we remove the input tag and make it look like an area someone would expect output?
+// 1b - there are alot of data validation problems that would be fixed by doing that
+// 2 - can we construct a binary tree where the operands sit between the numbers they are operating on?
+// 2a - or we can convert the string input to a valid expression that oututs a number
